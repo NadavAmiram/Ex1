@@ -30,7 +30,6 @@ public class Ex1
             System.out.println("structure is iligel");
             return ans;
         }
-        if ( )
         return ans;
     }
     /**
