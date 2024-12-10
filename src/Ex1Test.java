@@ -13,6 +13,11 @@ public class Ex1Test {
         assertEquals(11, Ex1.number2Int("11b10"));
         assertEquals(-1, Ex1.number2Int("123b17")); // בסיס לא חוקי
         assertEquals(-1, Ex1.number2Int("12b"));   // מבנה לא חוקי
+        assertEquals(-1, Ex1.number2Int("1234b11"));   // מבנה לא חוקי
+        assertEquals(-1, Ex1.number2Int("3 b4"));   // מבנה לא חוקי
+        assertEquals(-1, Ex1.number2Int("GbG"));   // מבנה לא חוקי
+        assertEquals(-1, Ex1.number2Int("null"));   // מבנה לא חוקי
+
     }
 
     @Test
@@ -26,7 +31,7 @@ public class Ex1Test {
     @Test
     void isNumberTest() {
         assertTrue(Ex1.isNumber("1011b2"));
-        assertTrue(Ex1.isNumber("FFb16"));
+        assertTrue(Ex1.isNumber("FFbG"));
         assertFalse(Ex1.isNumber("123b17")); // בסיס לא חוקי
         assertFalse(Ex1.isNumber("12b"));   // מבנה לא חוקי
         assertFalse(Ex1.isNumber(""));      // מחרוזת ריקה
@@ -40,7 +45,7 @@ public class Ex1Test {
 
     @Test
     void maxIndexTest() {
-        String[] arr = {"1011b2", "FFb16", "0b10", "1111b2"};
+        String[] arr = {"1011b2", "FFbG", "0b10", "1111b2"};
         assertEquals(1, Ex1.maxIndex(arr)); // המספר הגדול ביותר בבסיס 16
     }
 
@@ -58,5 +63,32 @@ public class Ex1Test {
         assertFalse(Ex1.checkValid("1021", 2)); // הספרה '2' לא חוקית בבסיס 2
         assertTrue(Ex1.checkValid("FF", 16));
         assertFalse(Ex1.checkValid("FG", 16)); // 'G' לא חוקי בבסיס 16
+    }
+
+    @Test
+    void computeNumberTest() {
+        String s2 = "1011b2";
+        int v = Ex1.number2Int(s2);
+        assertEquals(v,11);
+        String s10 = "1011bA";
+        v = Ex1.number2Int(s10);
+        s2 = Ex1.int2Number(v,2);
+        int v2 = Ex1.number2Int(s2);
+        assertEquals(v,v2);
+        assertTrue(Ex1.equals(s10,s2));
+    }
+
+    @Test
+    void isBasisNumberTest() {
+        String[] good = {"1", "1b2", "01b2", "123bA", "ABbG", "0bA"};
+        for(int i=0;i<good.length;i=i+1) {
+            boolean ok = Ex1.isNumber(good[i]);
+            assertTrue(ok);
+        }
+        String[] not_good = {"b2", "2b2", "1G3bG", " BbG", "0bbA", "abB", "!@b2", "A", "1bb2"};
+        for(int i=0;i<not_good.length;i=i+1) {
+            boolean not_ok = Ex1.isNumber(not_good[i]);
+            assertFalse(not_ok);
+        }
     }
 }

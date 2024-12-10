@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 public class Ex1Main
@@ -34,15 +35,15 @@ public class Ex1Main
             System.out.println();
             System.out.println("Ex1 class solution:");
             System.out.println("Enter a string as number#1 (or \"quit\" to end the program): ");
-            Strnum1 = input.next();
+            Strnum1 = input.nextLine();
             if (Strnum1.equals("quit"))
                 break;
-            System.out.println("num1 = "+Strnum1+" is number : true , value =" +Ex1.number2Int(Strnum1));
+            System.out.println("num1 = "+Strnum1+" is number: " + Ex1.isNumber(Strnum1) +  " value = " +Ex1.number2Int(Strnum1));
             System.out.println("Enter a string as number#2 (or \"quit\" to end the program): ");
-            Strnum2 = input.next();
+            Strnum2 = input.nextLine();
             if (Strnum2.equals("quit"))
                 break;
-            System.out.println("num2 = "+Strnum2+" is number : true , value =" +Ex1.number2Int(Strnum2));
+            System.out.println("num1 = "+Strnum2+" is number: " + Ex1.isNumber(Strnum2) +  " value = " +Ex1.number2Int(Strnum2));
             System.out.println("Enter a base for output ( number [2,16]");
             String tempBase = input.next();
             if (tempBase.equals("quit"))

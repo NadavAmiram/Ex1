@@ -114,6 +114,8 @@ public class Ex1
 
     //בודקת אם המספר תקין
     public static boolean isNumber(String a) {
+        if (a.contains(" "))
+            return false;
         boolean ans = false;
         int index = a.indexOf("b");
         int indexNegative = a.indexOf("-"); //למצוא אם יש מינוס
@@ -122,15 +124,12 @@ public class Ex1
             System.out.println("structure is illegal");
             return ans;
         }
-        /*
-        if (index == -1) // בודק אם b לא נמצא במחרוזת
+        String strNum , strBase;
+        if (a.equals(""))
         {
-            System.out.println("structure is illegal");
+            System.out.println("structure is illegal"); // בודק אם הבסיס לא מורכב מתו אחד
             return ans;
         }
-
-         */
-        String strNum , strBase;
         if (index == -1)
         {
             strNum = a;
@@ -154,6 +153,12 @@ public class Ex1
                 return ans;
             }
         }
+        if (strBase.equals("11") || strBase.equals("12") || strBase.equals("13") || strBase.equals("14") || strBase.equals("15") || strBase.equals("16"))
+        {
+            System.out.println("structure is illegal"); //סתם מספר אם המשתמש כותב מספר בלי לשים b ובסיס כלומר הכוונה למספר עצמו בהצגה בבסיס עשר לדוגמה המשתמש הכניס "66" ייפלט לו 66
+            return ans;
+        }
+
         String tempBase = returnStringInString(strBase);
         char chBase = tempBase.charAt(0);
         int base = returnCharInInt(chBase);
@@ -163,6 +168,7 @@ public class Ex1
             System.out.println("structure is illegal"); // בודק אם הבסיס תקין
             return ans;
         }
+
 
         if (checkValid(strNum , base) == false) // בודק אם כל הספרות במספר קטנות מהמספר של הבסיס
         {
@@ -187,6 +193,7 @@ public class Ex1
         return ans;
     }
 
+    //מחזיר את האינדקס של המספר בעל הערך הגדול ביותר
     public static int maxIndex(String[] arr) {
         int ans = -1;
         int maxVal = -1;
@@ -196,7 +203,7 @@ public class Ex1
         {
             if (isNumber(arr[i]))
             {
-                if (i==3)
+                if (i== arr.length-1)
                     System.out.print(arr[i]);
                 else
                 {
@@ -213,8 +220,8 @@ public class Ex1
         return ans;
     }
 
-    //בודקת אם כל המספרים פחותים מהבסיס
 
+    //בודקת אם כל המספרים פחותים מהבסיס
     public static boolean checkValid(String num , int base)
     {
         char ch = ' ';
