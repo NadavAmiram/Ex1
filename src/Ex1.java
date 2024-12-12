@@ -4,14 +4,14 @@ public class Ex1
     // מעשרוני לבסיס מסוים
     public static String int2Number(int num, int base)
     {
-        String ans ="";
+        String ans ;
         if (num< 0 )
             return "";
         if (base <2 || base>16)
             return "";
-        String strBase = String.valueOf(base);
+       // String strBase = String.valueOf(base);
         int quotient , remainder;
-        char chRemainder =' ' ;
+        char chRemainder ;
         StringBuilder ansBuilder = new StringBuilder();
         while (num/base != 0)
         {
@@ -24,7 +24,10 @@ public class Ex1
         remainder = num%base;
         chRemainder = intToChar (remainder); // הןפך את הreminder לתו
         ansBuilder.append(chRemainder);  // מכניס את התו של הremainder למחרוזת
-        ansBuilder = ansBuilder.reverse();
+        ansBuilder.reverse();
+        if (base == 10){
+            ans = ansBuilder.toString();
+            return ans; }
         ansBuilder.append("b"+intToString(base));
         ans = ansBuilder.toString();
         return ans;
@@ -91,7 +94,7 @@ public class Ex1
                 char chBase = strBase.charAt(0); // התו של הבסיס
                 base = returnCharInInt(chBase); // האינט של התו של הבסיס
             }
-            char ch = ' '; // תו הספרה
+            char ch; // תו הספרה
             int digit; // אינט הספרה
             int pow = strNum.length() - 1;
             double sum = 0;
@@ -113,7 +116,8 @@ public class Ex1
     }
 
     //בודקת אם המספר תקין
-    public static boolean isNumber(String a) {
+    public static boolean isNumber(String a)
+    {
         if (a.contains(" "))
             return false;
         boolean ans = false;
@@ -121,13 +125,11 @@ public class Ex1
         int indexNegative = a.indexOf("-"); //למצוא אם יש מינוס
         if (indexNegative != -1) // בודק אם b לא נמצא במחרוזת
         {
-            System.out.println("structure is illegal");
             return ans;
         }
         String strNum , strBase;
         if (a.equals(""))
         {
-            System.out.println("structure is illegal"); // בודק אם הבסיס לא מורכב מתו אחד
             return ans;
         }
         if (index == -1)
@@ -140,24 +142,28 @@ public class Ex1
             strNum = a.substring(0, index);
             strBase = a.substring(index + 1);
         }
+        for(int i =0 ;i <strBase.length(); i++)
+        {
+            if (!checkDigits(strBase.charAt(i)))
+                return ans;
+        }
         if (strBase.length()>2)
         {
-            System.out.println("structure is illegal"); // בודק אם הבסיס לא מורכב מתו אחד
             return ans;
         }
         if (strBase.equals("") || strNum.equals(""))  // בודק אם אין בסיס / מספר
         {
             if (index != -1)
             {
-                System.out.println("structure is illegal"); //סתם מספר אם המשתמש כותב מספר בלי לשים b ובסיס כלומר הכוונה למספר עצמו בהצגה בבסיס עשר לדוגמה המשתמש הכניס "66" ייפלט לו 66
                 return ans;
             }
         }
         if (strBase.equals("11") || strBase.equals("12") || strBase.equals("13") || strBase.equals("14") || strBase.equals("15") || strBase.equals("16"))
         {
-            System.out.println("structure is illegal"); //סתם מספר אם המשתמש כותב מספר בלי לשים b ובסיס כלומר הכוונה למספר עצמו בהצגה בבסיס עשר לדוגמה המשתמש הכניס "66" ייפלט לו 66
             return ans;
         }
+
+
 
         String tempBase = returnStringInString(strBase);
         char chBase = tempBase.charAt(0);
@@ -165,14 +171,12 @@ public class Ex1
 
         if (returnCharInInt(chBase) > 16 || returnCharInInt(chBase) <2)
         {
-            System.out.println("structure is illegal"); // בודק אם הבסיס תקין
             return ans;
         }
 
 
-        if (checkValid(strNum , base) == false) // בודק אם כל הספרות במספר קטנות מהמספר של הבסיס
+        if (!checkValid(strNum, base)) // בודק אם כל הספרות במספר קטנות מהמספר של הבסיס
         {
-            System.out.println("structure is illegal");
             return ans;
         }
         ans = true;
@@ -197,7 +201,6 @@ public class Ex1
     public static int maxIndex(String[] arr) {
         int ans = -1;
         int maxVal = -1;
-        System.out.println("");
         System.out.print("Max numbers over [");
         for (int i = 0; i< arr.length; i++)
         {
@@ -224,10 +227,12 @@ public class Ex1
     //בודקת אם כל המספרים פחותים מהבסיס
     public static boolean checkValid(String num , int base)
     {
-        char ch = ' ';
+        char ch ;
         for (int i = 0 ; i<num.length(); i++)
         {
             ch = num.charAt(i);
+            if (!checkDigits(ch))
+                return false;
             if (returnCharInInt(ch)>=base)
                 return false;
         }
@@ -272,5 +277,27 @@ public class Ex1
             return "G";
         else
             return base;
+    }
+
+    public static boolean checkDigits (char ch)
+    {
+        if (ch == 'A')
+            return true;
+        if (ch == 'B')
+            return true;
+        if (ch == 'C')
+            return true;
+        if (ch == 'D')
+            return true;
+        if (ch == 'E')
+            return true;
+        if (ch == 'F')
+            return true;
+        if (ch == 'G')
+            return true;
+        if (Character.isDigit(ch))
+            return true;
+
+        return false;
     }
 }
