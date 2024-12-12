@@ -1,7 +1,7 @@
-# Ex1: Number Conversion and Validation
+# Ex1
 
 ## Overview
-This project includes utility methods for number conversion and validation, implemented in Java. It provides functionality for converting numbers between decimal and other bases (2-16), checking if a number string is valid, and comparing or analyzing numbers in different bases.
+This project includes utility methods for number conversion and validation. It provides functionality for converting numbers between decimal and other bases (2-16), checking if a number string is valid, and comparing or analyzing numbers in different bases.
 
 ## Features
 
@@ -41,8 +41,6 @@ This project includes utility methods for number conversion and validation, impl
 
 ### `Ex1Test`
 
-JUnit tests are provided to validate the correctness of the implemented methods. Key test cases include:
-
 - `number2IntTest()`: Tests conversion of number strings to integers.
 - `int2NumberTest()`: Tests conversion of integers to number strings.
 - `isNumberTest()`: Tests validation of number strings.
@@ -56,6 +54,6 @@ JUnit tests are provided to validate the correctness of the implemented methods.
 ## Notes
 - Bases are limited to the range 2 to 16. Attempts to use unsupported bases will return default or error values.
 - Negative numbers are not supported in some methods and will return empty strings.
-- Strings are expected to follow the format `<number><b><base>` for bases other than 10.
+- Strings are expected to follow the format `number-b-base` .
 
 
